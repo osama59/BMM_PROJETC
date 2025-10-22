@@ -15,8 +15,12 @@ export default defineConfig({
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/Osama59' }],
 			sidebar: [
 				{
-					label: 'المدخل لفن الوسائط المتعددة',
+					label: 'الفصل الأول',
 					autogenerate: { directory: 'reference' },
+				},
+				{
+					label: 'الفصل الثاني',
+					autogenerate: { directory: 'reference_2' },
 				},
 				
 			],
