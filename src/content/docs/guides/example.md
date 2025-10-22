@@ -9,7 +9,7 @@ description: مجموعة من الصور والفيديوهات التي تعب
 
 ### introduction Video
 <video controls width="100%">
-  <source src="/public/Introduction.mp4" type="video/mp4" />
+  <source src="/Introduction.mp4" type="video/mp4" />
   Your browser does not support the video tag.
 </video>
 
