@@ -11,11 +11,17 @@ hero:
     - text: البدء بالتعلم
       link: /guides/example/
       icon: right-arrow
+    - text: ابدأ من الفصل الأول
+      link: /reference/1/
+      icon: star
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
+import CourseProgress from '../../components/CourseProgress.astro'
 
 ## الخطوات القادمة
+
+<CourseProgress />
 
 <CardGrid stagger>
     <Card title="ما هو الوسائط المتعددة؟" icon="pencil">
@@ -31,3 +37,4 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
         اكتشف مصادر إضافية ومقالات مفيدة لتوسيع معرفتك في هذا المجال.
     </Card>
 </CardGrid>
+

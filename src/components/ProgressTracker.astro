@@ -1,0 +1,36 @@
+---
+const { pageId, title } = Astro.props as { pageId: string; title?: string };
+const key = `progress:${pageId}`;
+---
+<style>
+  .wrap { display: flex; align-items: center; gap: .75rem; padding: .5rem .75rem; border: 1px dashed var(--sl-color-border); border-radius: 8px; background: color-mix(in srgb, var(--sl-color-border) 10%, transparent); }
+  .badge { padding: .25rem .5rem; border-radius: 999px; font-size: .85rem; }
+  .done { background: #16a34a; color: white; }
+  .todo { background: #9ca3af; color: white; }
+  button { background: var(--sl-color-accent); color: white; border: none; border-radius: 6px; padding: .25rem .5rem; cursor: pointer; }
+</style>
+<div class="wrap" dir="rtl" id={`pg-${pageId}`}>
+  {title ? <strong>{title}</strong> : null}
+  <span class="badge todo" data-role="badge">غير مكتمل</span>
+  <button type="button" onclick={`(function(){
+    const root = document.getElementById('pg-${pageId}');
+    const badge = root?.querySelector('[data-role="badge"]');
+    const done = localStorage.getItem('${key}') === '1';
+    const next = done ? '0' : '1';
+    localStorage.setItem('${key}', next);
+    if(badge){ if(next==='1'){ badge.textContent='مكتمل'; badge.className='badge done'; try { document.dispatchEvent(new CustomEvent('lesson-completed', { detail: { pageId: '${pageId}' } })); } catch(e){} } else { badge.textContent='غير مكتمل'; badge.className='badge todo'; } }
+  })()`}>بدّل الحالة</button>
+</div>
+<script is:inline>
+  (function(){
+    const key = '${key}';
+    const root = document.getElementById('pg-${pageId}');
+    const badge = root?.querySelector('[data-role="badge"]');
+    const done = localStorage.getItem(key) === '1';
+    if(badge){ if(done){ badge.textContent='مكتمل'; badge.className='badge done'; } }
+    try { document.addEventListener('lesson-completed', function(ev){
+      const pid = ev?.detail?.pageId;
+      if(pid === '${pageId}' && badge){ badge.textContent='مكتمل'; badge.className='badge done'; }
+    }); } catch(e){}
+  })();
+</script>

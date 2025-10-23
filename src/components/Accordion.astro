@@ -1,0 +1,12 @@
+---
+const { title, open = false } = Astro.props as { title: string; open?: boolean };
+---
+<style>
+  details { border: 1px solid var(--sl-color-border); border-radius: 8px; padding: .5rem .75rem; background: var(--sl-color-bg, transparent); }
+  summary { cursor: pointer; font-weight: 700; }
+  .content { margin-top: .5rem; }
+</style>
+<details dir="rtl" {...(open ? { open: true } : {})}>
+  <summary>{title}</summary>
+  <div class="content"><slot /></div>
+</details>

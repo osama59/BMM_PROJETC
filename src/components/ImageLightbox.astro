@@ -1,0 +1,16 @@
+---
+const { src, alt = '', width } = Astro.props as { src: string; alt?: string; width?: string };
+const id = `lb-${Math.random().toString(36).slice(2)}`;
+---
+<style>
+  .thumb { cursor: zoom-in; border-radius: 8px; }
+  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: none; align-items: center; justify-content: center; z-index: 1000; }
+  .overlay.open { display: flex; }
+  .overlay img { max-width: 95vw; max-height: 90vh; border-radius: 8px; }
+  .close { position: absolute; top: 1rem; left: 1rem; color: white; font-size: 1.5rem; cursor: pointer; }
+</style>
+<img src={src} alt={alt} class="thumb" width={width} onclick={`document.getElementById('${id}')?.classList.add('open')`} />
+<div class="overlay" id={id} onclick={`this.classList.remove('open')`}>
+  <span class="close">✕</span>
+  <img src={src} alt={alt} />
+</div>

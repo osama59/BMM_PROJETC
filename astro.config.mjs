@@ -6,13 +6,11 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			
 			title: 'Mediato',
 			customCss: [
 				// Relative path to your custom CSS file
 				'./src/styles/custom.css',
 			],
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/Osama59' }],
 			sidebar: [
 				{
 					label: 'الفصل الأول',

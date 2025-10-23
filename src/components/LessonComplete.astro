@@ -1,0 +1,42 @@
+---
+const { pageId } = Astro.props as { pageId: string };
+---
+<style>
+  .wrap { display: flex; align-items: center; gap: 1rem; padding: 1rem; border: 2px solid var(--sl-color-border); border-radius: 12px; background: color-mix(in srgb, var(--sl-color-border) 8%, transparent); margin-top: 2rem; }
+  .badge { padding: .5rem 1rem; border-radius: 999px; font-weight: 700; font-size: .95rem; }
+  .done { background: #16a34a; color: white; }
+  .todo { background: #9ca3af; color: white; }
+  .text { flex: 1; }
+</style>
+<div class="wrap" dir="rtl" id={`lesson-complete-${pageId}`}>
+  <div class="text">
+    <strong>حالة الدرس</strong>
+  </div>
+  <span class="badge todo" data-role="badge">غير مكتمل</span>
+</div>
+
+<script is:inline define:vars={{ pageId }}>
+  (function(){
+    const key = 'progress:' + pageId;
+    const wrap = document.getElementById('lesson-complete-' + pageId);
+    const badge = wrap?.querySelector('[data-role="badge"]');
+    
+    // Check on load
+    const isDone = localStorage.getItem(key) === '1';
+    if(badge && isDone){
+      badge.textContent = 'مكتمل ✔';
+      badge.className = 'badge done';
+    }
+    
+    // Listen for quiz completion
+    try {
+      document.addEventListener('lesson-completed', function(ev){
+        const pid = ev?.detail?.pageId;
+        if(pid === pageId && badge){
+          badge.textContent = 'مكتمل ✔';
+          badge.className = 'badge done';
+        }
+      });
+    } catch(e){}
+  })();
+</script>

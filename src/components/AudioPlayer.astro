@@ -1,0 +1,7 @@
+---
+const { src, title } = Astro.props as { src: string; title?: string };
+---
+<div dir="rtl">
+  {title ? <div style="margin-bottom:.25rem;font-weight:700">{title}</div> : null}
+  <audio controls src={src} style="width:100%"></audio>
+</div>
