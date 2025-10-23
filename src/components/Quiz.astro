@@ -1,0 +1,98 @@
+---
+const { question, choices, answerIndex, id, completePageId } = Astro.props as {
+  question: string;
+  choices: string[];
+  answerIndex: number;
+  id: string;
+  completePageId?: string;
+};
+---
+<style>
+  .quiz { border: 1px solid var(--sl-color-border); border-radius: 8px; padding: 1rem; background: var(--sl-color-bg, transparent); }
+  .question { font-weight: 700; margin-bottom: .75rem; }
+  .choices { display: grid; gap: .5rem; margin: .5rem 0 1rem; }
+  .correct { color: #16a34a; }
+  .incorrect { color: #dc2626; }
+  .completed { background: #16a34a; color: white; padding: 1rem; border-radius: 8px; text-align: center; font-weight: 700; }
+  .buttons { display: flex; gap: .5rem; width: 100%; }
+  button { flex: 1; background: var(--sl-color-accent); color: white; border: none; border-radius: 6px; padding: .75rem 1rem; cursor: pointer; font-weight: 700; }
+  button:disabled { opacity: .7; cursor: not-allowed; }
+  .retry-btn { margin:0px; background: #6b7280; }
+  .retry-btn:hover { background: #4b5563; }
+</style>
+<div class="quiz" dir="rtl" id={`quiz-wrap-${id}`}>
+  <div class="question">{question}</div>
+  <form onsubmit="return false" id={`form-${id}`} data-quiz-id={id}>
+    <div class="choices">
+      {choices.map((c, i) => (
+        <label style="display:flex;gap:.5rem;align-items:flex-start">
+          <input type="radio" name={`q-${id}`} value={String(i)} />
+          <span>{c}</span>
+        </label>
+      ))}
+    </div>
+    <div class="buttons">
+      <button type="button" class="check-btn" onclick={`(function(){
+        const form = document.getElementById('form-${id}');
+        if(!form) return;
+        const sel = form.querySelector('input[name="q-${id}"]:checked');
+        const feedback = form.querySelector('.feedback');
+        if(!sel){ feedback.textContent = 'يرجى اختيار إجابة.'; feedback.className = 'feedback'; return; }
+        const chosen = parseInt(sel.value,10);
+        const correct = ${answerIndex};
+        if(chosen === correct){ 
+          feedback.textContent = 'إجابة صحيحة ✔'; 
+          feedback.className = 'feedback correct';
+          const pageId = '${completePageId ?? ''}';
+          if(pageId){ try { localStorage.setItem('progress:'+pageId, '1'); } catch(e){}
+            try { document.dispatchEvent(new CustomEvent('lesson-completed', { detail: { pageId } })); } catch(e){}
+          }
+          try { localStorage.setItem('quiz-done:${id}', '1'); } catch(e){}
+          setTimeout(function(){
+            const wrap = document.getElementById('quiz-wrap-${id}');
+            if(wrap){ wrap.classList.add('quiz-completed'); }
+            const inputs = form.querySelectorAll('input');
+            inputs.forEach(inp => inp.disabled = true);
+            const checkBtn = form.querySelector('.check-btn');
+            if(checkBtn) checkBtn.disabled = true;
+          }, 300);
+        }
+        else { feedback.textContent = 'إجابة غير صحيحة ✘'; feedback.className = 'feedback incorrect'; }
+      })()`}>تحقق</button>
+      <button type="button" class="retry-btn" onclick={`(function(){
+        const form = document.getElementById('form-${id}');
+        if(!form) return;
+        const inputs = form.querySelectorAll('input');
+        inputs.forEach(inp => { inp.checked = false; inp.disabled = false; });
+        const feedback = form.querySelector('.feedback');
+        if(feedback) feedback.textContent = '';
+        const wrap = document.getElementById('quiz-wrap-${id}');
+        if(wrap) wrap.classList.remove('quiz-completed');
+        const checkBtn = form.querySelector('.check-btn');
+        if(checkBtn) checkBtn.disabled = false;
+        try { localStorage.removeItem('quiz-done:${id}'); } catch(e){}
+      })()`}>إعادة محاولة</button>
+    </div>
+    <div class="feedback" aria-live="polite"></div>
+  </form>
+  <div class="completed" id={`completed-${id}`} style="display:none">✔ تم إكمال هذا الاختبار بنجاح!</div>
+</div>
+
+<script is:inline define:vars={{ id }}>
+  (function(){
+    const isDone = localStorage.getItem('quiz-done:' + id) === '1';
+    if(isDone){
+      const wrap = document.getElementById('quiz-wrap-' + id);
+      const form = document.getElementById('form-' + id);
+      const completed = document.getElementById('completed-' + id);
+      if(wrap) wrap.classList.add('quiz-completed');
+      if(form){
+        const inputs = form.querySelectorAll('input');
+        inputs.forEach(inp => inp.disabled = true);
+        const checkBtn = form.querySelector('.check-btn');
+        if(checkBtn) checkBtn.disabled = true;
+      }
+      if(completed) completed.style.display = 'block';
+    }
+  })();
+</script>

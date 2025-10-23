@@ -1,15 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap');
+
 :root {
-  --sl-color-accent: #4A5AD1;
+  --sl-color-primary: #4A5AD1;
+  --sl-color-accent: #FFB000;
+  --sl-color-neutral-dark: #2C2C2C;
+  --sl-color-neutral-light: #999999;
+  --sl-color-strong-blue: #E8EBFA;
+  --sl-color-background-warm: #FFF3CC;
+  --sl-color-muted-blue: #3F4FA5;
+  --sl-color-light-gray: #CCCCCC;
+  --sl-color-deep-gray: #666666;
+  --sl-color-deep-navy: #1E2A78;
+  --sl-color-sky-blue: #A8B4F9;
+  --sl-color-soft-yellow: #FFF3C2;
+  --sl-color-aqua-mint: #00D4B4;
+  --sl-color-coral-red: #FF6259;
   --sl-color-background: #999999 ;
-  --sl-color-muted: #999999;
   --sl-color-border: #FFB000;
-  
 }
 
  a:hover {
   color: #FFB000; /* Accent yellow on hover */
 }
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap');
 body {
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
@@ -50,3 +62,50 @@ ul {
   padding-right: 1.5rem;
   margin-right: 0;
 }
+
+/* RTL improvements for lesson content */
+main {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Ensure lists are properly aligned */
+ul, ol {
+  padding-right: 20px;
+  padding-left: 0;
+  margin-right: 1.5em;
+  margin-left: 0;
+}
+
+li {
+  margin-bottom: 0.5em;
+}
+
+/* Keep code blocks LTR */
+pre, code {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Adjust blockquotes for RTL */
+blockquote {
+  border-left: none;
+  border-right: 4px solid var(--sl-color-border);
+  padding-left: 0;
+  padding-right: 1em;
+  margin-left: 0;
+  margin-right: 1em;
+}
+
+/* Adjust Starlight's main content column */
+.sl-container .main-column {
+    text-align: right;
+}
+
+.content { margin-top: .5rem; }
+.audio-player { width: 100%; }
+.wrap { display: flex; align-items: center; gap: 1rem; padding: 1.5rem; border: 2px solid var(--sl-color-accent); border-radius: 12px; background: color-mix(in srgb, var(--sl-color-accent) 10%, transparent); margin-top: 2rem; text-align: center; justify-content: center; flex-direction: column; }
+.btn { background: var(--sl-color-accent); color: white; border: none; border-radius: 8px; padding: .75rem 1.5rem; cursor: pointer; font-weight: 700; font-size: 1rem; transition: opacity .2s; }
+.btn:hover { opacity: .9; }
+.btn:disabled { opacity: .6; cursor: not-allowed; }
+.completed { background: #16a34a; color: white; padding: 1rem; border-radius: 8px; text-align: center; font-weight: 700; margin-top: 1rem; }

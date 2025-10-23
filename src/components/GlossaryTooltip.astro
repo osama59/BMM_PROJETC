@@ -1,0 +1,23 @@
+---
+const { term, definition } = Astro.props as { term: string; definition: string };
+const id = `gt-${Math.random().toString(36).slice(2)}`;
+---
+<style>
+  .term { border-bottom: 1px dotted var(--sl-color-border); cursor: help; }
+  .tip { position: absolute; background: var(--sl-color-background); color: var(--sl-color-text); border: 1px solid var(--sl-color-border); padding: .5rem .75rem; border-radius: 8px; max-width: 280px; box-shadow: 0 4px 16px rgba(0,0,0,.15); display: none; z-index: 1000; }
+</style>
+<span class="term" onclick={`(function(e){
+  const tip = document.getElementById('${id}');
+  if(!tip) return; tip.style.display = tip.style.display==='block' ? 'none' : 'block';
+  const rect = e.target.getBoundingClientRect();
+  tip.style.top = (rect.bottom + window.scrollY + 8) + 'px';
+  tip.style.left = (rect.right + window.scrollX - tip.offsetWidth) + 'px';
+})(event)`} onmouseover={`(function(e){
+  const tip = document.getElementById('${id}'); if(!tip) return; tip.style.display='block';
+  const rect = e.target.getBoundingClientRect();
+  tip.style.top = (rect.bottom + window.scrollY + 8) + 'px';
+  tip.style.left = (rect.right + window.scrollX - tip.offsetWidth) + 'px';
+})(event)`} onmouseout={`document.getElementById('${id}').style.display='none'`}>
+  {term}
+</span>
+<div class="tip" id={id} dir="rtl">{definition}</div>
