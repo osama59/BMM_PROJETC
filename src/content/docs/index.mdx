@@ -9,17 +9,29 @@ hero:
       dark: ../../assets/MediatoWhite.webp
   actions:
     - text: البدء بالتعلم
-      link: /guides/example/
-      icon: right-arrow
-    - text: ابدأ من الفصل الأول
       link: /reference/1/
-      icon: star
+      icon: right-arrow
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 import CourseProgress from '../../components/CourseProgress.astro'
 
-## الخطوات القادمة
+## ابدأ رحلتك التعليمية
+
+<CardGrid>
+	<Card title="أساسيات الوسائط المتعددة" icon="book">
+		تعلم المبادئ الأساسية للوسائط المتعددة، من الصور والصوت إلى الفيديو والرسوم المتحركة.
+	</Card>
+	<Card title="مواضيع متقدمة" icon="rocket">
+		تعمق في مفاهيم متقدمة مثل الواقع الافتراضي، والوسائط التفاعلية، وتصميم تجارب المستخدم.
+	</Card>
+	<Card title="أدلة وتطبيقات" icon="open-book">
+		استكشف دروسًا تعليمية وأمثلة عملية لتطبيق معرفتك في مشاريع حقيقية.
+	</Card>
+</CardGrid>
+
+
+## ابدأ من حيث توقفت
 
 <CourseProgress />
 
