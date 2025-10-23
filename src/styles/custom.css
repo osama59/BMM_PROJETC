@@ -101,3 +101,11 @@ blockquote {
 .sl-container .main-column {
     text-align: right;
 }
+
+.content { margin-top: .5rem; }
+.audio-player { width: 100%; }
+.wrap { display: flex; align-items: center; gap: 1rem; padding: 1.5rem; border: 2px solid var(--sl-color-accent); border-radius: 12px; background: color-mix(in srgb, var(--sl-color-accent) 10%, transparent); margin-top: 2rem; text-align: center; justify-content: center; flex-direction: column; }
+.btn { background: var(--sl-color-accent); color: white; border: none; border-radius: 8px; padding: .75rem 1.5rem; cursor: pointer; font-weight: 700; font-size: 1rem; transition: opacity .2s; }
+.btn:hover { opacity: .9; }
+.btn:disabled { opacity: .6; cursor: not-allowed; }
+.completed { background: #16a34a; color: white; padding: 1rem; border-radius: 8px; text-align: center; font-weight: 700; margin-top: 1rem; }
