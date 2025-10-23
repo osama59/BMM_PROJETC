@@ -26,9 +26,10 @@ const lessons: { id: string; path: string; title: string; hasQuiz: boolean }[] =
   .item-left { display: flex; align-items: center; gap: .5rem; flex: 1; }
   .badge { padding: 0 .5rem; border-radius: 999px; font-size: .75rem; background: #9ca3af; color: white; white-space: nowrap; }
   .done { background: #16a34a; }
-  .btn { background: var(--sl-color-accent); color: white; border: none; border-radius: 6px; padding: .4rem .6rem; text-decoration: none; display: inline-block; font-size: .85rem; cursor: pointer; }
+  .btn, .btn-small { background: var(--sl-color-accent); color: white; border: none; border-radius: 6px; padding: .5rem .75rem; text-decoration: none; display: inline-block; font-size: .85rem; cursor: pointer; width: 120px; }
   .btn:hover { opacity: .9; }
-  .btn-small { padding: .3rem .5rem; font-size: .75rem; }
+  .btn-continue { background: var(--sl-color-primary); color: white; border: none; border-radius: 6px; padding: .75rem 1.5rem; text-decoration: none; display: inline-block; font-size: .9rem; cursor: pointer; transition: background-color .3s ease; }
+  .btn-continue:hover { background-color: var(--sl-color-muted-blue); }
 </style>
 <div class="cp" dir="rtl" id="course-progress">
   <div class="row" style="margin-bottom:.5rem">
@@ -38,7 +39,7 @@ const lessons: { id: string; path: string; title: string; hasQuiz: boolean }[] =
   <div class="bar"><div class="fill" data-role="fill"></div></div>
   <div class="row" style="margin-top:.75rem">
     <span class="muted">استمر من حيث توقفت</span>
-    <a class="btn" data-role="continue" href="/reference/1/">متابعة</a>
+    <a class="btn-continue" data-role="continue" href="/reference/1/">متابعة</a>
   </div>
   <div class="list">
     {lessons.map(l => (
