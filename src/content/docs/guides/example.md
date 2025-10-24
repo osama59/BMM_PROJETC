@@ -7,7 +7,6 @@ description: مجموعة من الصور والفيديوهات التي تعب
 مرحبًا بك في هذا الدليل التفاعلي لتعلّم **الوسائط المتعددة**!  
 في هذا الموقع ستجد محتوى مبسطًا ومصورًا يساعدك على فهم المفاهيم الأساسية لهذا المجال، من خلال:
 
-### introduction Video
 <video controls width="100%">
   <source src="/Introduction.mp4" type="video/mp4" />
   Your browser does not support the video tag.
