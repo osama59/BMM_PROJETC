@@ -109,3 +109,11 @@ blockquote {
 .btn:hover { opacity: .9; }
 .btn:disabled { opacity: .6; cursor: not-allowed; }
 .completed { background: #16a34a; color: white; padding: 1rem; border-radius: 8px; text-align: center; font-weight: 700; margin-top: 1rem; }
+
+.plyr__controls > * {
+    margin-top: 0 !important;
+}
+.plyr__controls button,
+.plyr__controls svg {
+    margin-top: 0 !important;
+}

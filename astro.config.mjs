@@ -11,6 +11,11 @@ export default defineConfig({
 				// Relative path to your custom CSS file
 				'./src/styles/custom.css',
 			],
+			head: [
+				{ tag: 'link', attrs: { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css' } },
+				{ tag: 'script', attrs: { src: 'https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.polyfilled.min.js', defer: true } },
+				{ tag: 'script', attrs: { src: '/js/plyr-init.js', defer: true } },
+			],
 			sidebar: [
 				{
 					label: 'الفصل الأول',
